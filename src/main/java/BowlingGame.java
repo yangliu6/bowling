@@ -19,13 +19,20 @@ public class BowlingGame {
 
     public int calculateSingleGameScore(int times) {
         //times 表示第几次
-        int score = 10;
-        int currentScore = (int)bowlingScore.get(times-1).get(0);
-        if(currentScore == 10 && (int)bowlingScore.get(times).get(0) != 10){
+        int score = 0;
+        int currentScore = 0;
+        for (int i = 0; i < bowlingScore.get(times-1).size(); i++) {
+            currentScore += (int)bowlingScore.get(times-1).get(i);
+        }
+
+        if((int)bowlingScore.get(times-1).get(0) == 10 && (int)bowlingScore.get(times).get(0) != 10){
             score = 10 +  (int)bowlingScore.get(times).get(0)+ (int) bowlingScore.get(times).get(1);
         }
-        else if(currentScore == 10 && (int)bowlingScore.get(times).get(0) == 10){
+        else if((int)bowlingScore.get(times-1).get(0) == 10 && (int)bowlingScore.get(times).get(0) == 10){
             score = 20 + (int)bowlingScore.get(times+1).get(0);
+        }
+        else if(currentScore == 10){
+            score = 10 + (int)bowlingScore.get(times).get(0);
         }
         return score;
     }
